@@ -54,7 +54,8 @@ Opción 3 – Buscar país
 <img width="386" height="74" alt="op3" src="https://github.com/user-attachments/assets/16cc5652-e40a-45e2-aef2-7b964c6a10f2" />
 
 
-🤝 Participación de los integrantes
+🤝 Participación de los integrantes:
+
 Stefano ………..  
 Se encargó inicialmente de la creación de las funciones principales y del tablero interactivo.
 
