@@ -44,9 +44,13 @@ La opción 0 permite salir del programa, ofreciendo antes la posibilidad de guar
 
 📌 Ejemplos de uso
 Opción 1 – Agregar país
+
+
 <img width="271" height="82" alt="op1" src="https://github.com/user-attachments/assets/11076d41-ea83-4d3d-a26c-a6ca60daaff0" />
 
 Opción 3 – Buscar país
+
+
 <img width="386" height="74" alt="op3" src="https://github.com/user-attachments/assets/16cc5652-e40a-45e2-aef2-7b964c6a10f2" />
 
 
