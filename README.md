@@ -1,9 +1,9 @@
 📘 Trabajo Práctico Integrador – Programación I
 Gestión de datos de países en Python: filtros, ordenamientos y estadísticas
-👥 Autores
-Mendez Guillermo
+👥 Autores:
 
-Stefano ………..
+Mendez Guillermo.
+Di Gianantonio Reyes Stefano.
 
 📝 Descripción del proyecto
 Este trabajo práctico consiste en el desarrollo de una aplicación de consola en Python destinada a la gestión de información de países.
@@ -56,10 +56,10 @@ Opción 3 – Buscar país
 
 🤝 Participación de los integrantes:
 
-Stefano ………..  
+Di Gianantonio Reyes Stefano: 
 Se encargó inicialmente de la creación de las funciones principales y del tablero interactivo.
 
-Mendez Guillermo  
+Mendez Guillermo:
 Mejoró la funcionalidad del código agregando herramientas de validación, como el uso de while True dentro de los try-except para permitir reintentos y evitar errores de entrada.
 
 Ambos trabajaron en conjunto en:
