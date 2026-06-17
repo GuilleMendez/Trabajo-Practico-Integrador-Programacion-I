@@ -5,6 +5,8 @@ Gestión de datos de países en Python: filtros, ordenamientos y estadísticas
 Mendez Guillermo.
 Di Gianantonio Reyes Stefano.
 
+Video de YT exoplicativo: https://youtu.be/knnmYZfZUZc
+
 📝 Descripción del proyecto
 Este trabajo práctico consiste en el desarrollo de una aplicación de consola en Python destinada a la gestión de información de países.
 El sistema permite:
