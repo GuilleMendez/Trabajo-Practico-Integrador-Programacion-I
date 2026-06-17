@@ -57,35 +57,57 @@ def guardar_datos(paises):
 
 def agregar_pais(paises):
 
-    nombre = input("Nombre: ").strip()
+    # Nombre
+    while True:
+        nombre = input("Nombre: ").strip()
+        if nombre == "":
+            print("El nombre no puede estar vacío.")
+            continue
 
-    if nombre == "":
-        print("El nombre no puede estar vacío.")
-        return
+        # Validar duplicado
+        existe = False
+        for pais in paises:
+            if pais["nombre"].lower() == nombre.lower():
+                existe = True
+                break
 
-    for pais in paises:
-        if pais["nombre"].lower() == nombre.lower():
+        if existe:
             print("Ese país ya existe.")
-            return
+            continue
 
-    continente = input("Continente: ").strip()
+        break  # nombre válido
 
-    if continente == "":
-        print("El continente no puede estar vacío.")
-        return
+    # Continente
+    while True:
+        continente = input("Continente: ").strip()
+        if continente == "":
+            print("El continente no puede estar vacío.")
+        else:
+            break
 
-    try:
-        poblacion = int(input("Población: "))
-        superficie = int(input("Superficie (km²): "))
+    # Población
+    while True:
+        try:
+            poblacion = int(input("Población: "))
+            if poblacion < 0:
+                print("La población debe ser positiva.")
+                continue
+            break
+        except ValueError:
+            print("Debe ingresar un número entero.")
 
-        if poblacion < 0 or superficie < 0:
-            print("Los valores deben ser positivos.")
-            return
+    # Superficie
+    while True:
+        try:
+            superficie = int(input("Superficie (km²): "))
+            if superficie < 0:
+                print("La superficie debe ser positiva.")
+                continue
+            break
+        except ValueError:
+            print("Debe ingresar un número entero.")
 
-    except ValueError:
-        print("Debe ingresar números enteros.")
-        return
-
+    # Agregar país
     paises.append({
         "nombre": nombre,
         "poblacion": poblacion,
@@ -102,29 +124,49 @@ def agregar_pais(paises):
 
 def actualizar_pais(paises):
 
-    nombre = input("Ingrese el país a actualizar: ").strip()
+    # Buscar país
+    while True:
+        nombre = input("Ingrese el país a actualizar: ").strip()
 
-    for pais in paises:
+        # Buscar coincidencia
+        pais_encontrado = None
+        for pais in paises:
+            if pais["nombre"].lower() == nombre.lower():
+                pais_encontrado = pais
+                break
 
-        if pais["nombre"].lower() == nombre.lower():
+        if pais_encontrado is None:
+            print("País no encontrado. Intente nuevamente.")
+            continue
+        else:
+            break  # país encontrado
 
-            try:
-                pais["poblacion"] = int(
-                    input("Nueva población: ")
-                )
+    # Actualizar población
+    while True:
+        try:
+            nueva_poblacion = int(input("Nueva población: "))
+            if nueva_poblacion < 0:
+                print("La población debe ser positiva.")
+                continue
+            pais_encontrado["poblacion"] = nueva_poblacion
+            break
+        except ValueError:
+            print("Debe ingresar un número entero.")
 
-                pais["superficie"] = int(
-                    input("Nueva superficie: ")
-                )
+    # Actualizar superficie
+    while True:
+        try:
+            nueva_superficie = int(input("Nueva superficie: "))
+            if nueva_superficie < 0:
+                print("La superficie debe ser positiva.")
+                continue
+            pais_encontrado["superficie"] = nueva_superficie
+            break
+        except ValueError:
+            print("Debe ingresar un número entero.")
 
-                print("Datos actualizados.")
-                return
+    print("Datos actualizados.")
 
-            except ValueError:
-                print("Valores inválidos.")
-                return
-
-    print("País no encontrado.")
 
 
 # ==========================
@@ -133,19 +175,26 @@ def actualizar_pais(paises):
 
 def buscar_pais(paises):
 
-    texto = input("Buscar país: ").lower()
+    while True:
+        texto = input("Buscar país: ").strip().lower()
 
-    resultados = []
+        if texto == "":
+            print("Debe ingresar un texto para buscar.")
+            continue
 
-    for pais in paises:
-        if texto in pais["nombre"].lower():
-            resultados.append(pais)
+        resultados = []
 
-    if len(resultados) == 0:
-        print("No se encontraron resultados.")
-        return
+        for pais in paises:
+            if texto in pais["nombre"].lower():
+                resultados.append(pais)
 
-    mostrar_lista(resultados)
+        if len(resultados) == 0:
+            print("No se encontraron resultados. Intente nuevamente.")
+            continue  # vuelve a pedir el input
+
+        # Si encontró resultados, los muestra y sale del while
+        mostrar_lista(resultados)
+        break
 
 
 # ==========================
@@ -154,68 +203,80 @@ def buscar_pais(paises):
 
 def filtrar_continente(paises):
 
-    continente = input("Continente: ").lower()
+    while True:
+        continente = input("Continente: ").strip().lower()
 
-    resultados = [
-        p for p in paises
-        if p["continente"].lower() == continente
-    ]
+        if continente == "":
+            print("Debe ingresar un continente.")
+            continue
 
-    if not resultados:
-        print("Sin resultados.")
-        return
+        resultados = [
+            p for p in paises
+            if p["continente"].lower() == continente
+        ]
 
-    mostrar_lista(resultados)
+        if not resultados:
+            print("Sin resultados. Intente nuevamente.")
+            continue
+
+        mostrar_lista(resultados)
+        break
 
 
 def filtrar_poblacion(paises):
 
-    try:
-        minimo = int(input("Población mínima: "))
-        maximo = int(input("Población máxima: "))
+   def filtrar_poblacion(paises):
 
-        if minimo > maximo:
-            print("Rango inválido.")
-            return
+    while True:
+        try:
+            minimo = int(input("Población mínima: "))
+            maximo = int(input("Población máxima: "))
 
-        resultados = [
-            p for p in paises
-            if minimo <= p["poblacion"] <= maximo
-        ]
+            if minimo > maximo:
+                print("Rango inválido. El mínimo no puede ser mayor que el máximo.")
+                continue  # vuelve a pedir
 
-        if not resultados:
-            print("Sin resultados.")
-            return
+            resultados = [
+                p for p in paises
+                if minimo <= p["poblacion"] <= maximo
+            ]
 
-        mostrar_lista(resultados)
+            if not resultados:
+                print("Sin resultados.")
+                break  # <<--- como pediste: sale del while
 
-    except ValueError:
-        print("Debe ingresar números.")
+            mostrar_lista(resultados)
+            break  # sale del while si todo está bien
+
+        except ValueError:
+            print("Debe ingresar números enteros. Intente nuevamente.")
 
 
 def filtrar_superficie(paises):
 
-    try:
-        minimo = int(input("Superficie mínima: "))
-        maximo = int(input("Superficie máxima: "))
+    while True:
+        try:
+            minimo = int(input("Superficie mínima: "))
+            maximo = int(input("Superficie máxima: "))
 
-        if minimo > maximo:
-            print("Rango inválido.")
-            return
+            if minimo > maximo:
+                print("Rango inválido. El mínimo no puede ser mayor que el máximo.")
+                continue  # vuelve a pedir
 
-        resultados = [
-            p for p in paises
-            if minimo <= p["superficie"] <= maximo
-        ]
+            resultados = [
+                p for p in paises
+                if minimo <= p["superficie"] <= maximo
+            ]
 
-        if not resultados:
-            print("Sin resultados.")
-            return
+            if not resultados:
+                print("Sin resultados.")
+                break  # <<--- como pediste: sale del while
 
-        mostrar_lista(resultados)
+            mostrar_lista(resultados)
+            break  # sale del while si todo está bien
 
-    except ValueError:
-        print("Debe ingresar números.")
+        except ValueError:
+            print("Debe ingresar números enteros. Intente nuevamente.")
 
 
 # ==========================
